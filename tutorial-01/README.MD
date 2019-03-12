@@ -1,5 +1,5 @@
-
-#Ansible tutorial: Inventory
+ 
+# Ansible tutorial: Inventory
 
 Before continuing, you need an inventory file. The default place for such a
 file is  `/etc/ansible/hosts`. However, you can configure ansible to look
