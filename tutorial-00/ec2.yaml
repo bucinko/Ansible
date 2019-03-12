@@ -1,0 +1,23 @@
+
+---
+- hosts: local
+  connection: local
+  gather_facts: False
+  vars:
+    instance_type: t2.micro
+    image: ami-08660f1c6fb6b01e7
+    keypair: mykey
+    region: eu-west-1
+    count: 1
+  tasks:
+    - name: Launch the new EC2 Instance
+      ec2:
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        keypair: "{{ keypair }}"
+        count: "{{count}}"
+      register: ec2
+~
+~
