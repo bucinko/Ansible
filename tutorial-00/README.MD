@@ -48,7 +48,7 @@ Deploy AWS lab using terraform
 ```bash
 terraform init ansible-aws-lab
 terraform plan ansible-aws-lab
-terraform apply ansible-aws-lab  -auto-approve
+terraform apply -auto-approve ansible-aws-lab  
 ```
 
 
