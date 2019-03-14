@@ -4,11 +4,28 @@
 
 ### Installing prerequisities 
 ```bash
-sudo yum install epel-release -y
-sudo yum install python-pip -y
-#pip install --upgrade pip
-sudo pip install boto3 awscli ansible
+wget https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
 ```
+
+Centos
+```bash
+sudo yum install unzip -y
+```
+
+Ubuntu
+```bash
+sudo apt-get install unzip -y
+```
+
+The unzip Terraform and move to path.
+
+
+```bash
+unzip terraform_0.11.13_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+```
+
+
 
 
 ### Authentication
@@ -16,9 +33,24 @@ sudo pip install boto3 awscli ansible
 Authentication with the AWS-related modules is handled by either specifying your access and secret key as ENV variables or module arguments.
 with environment variables:
 ```bash
-export AWS_ACCESS_KEY_ID='AK123'
-export AWS_SECRET_ACCESS_KEY='abc123'
+export AWS_ACCESS_KEY_ID='AABBBSABABAB'
+export AWS_SECRET_ACCESS_KEY='123123123123123123123'
+export AWS_DEFAULT_REGION="eu-west-1"
 ```
+
+edit ssh public kei in :
+```bash
+ansible-aws-lab/var.tf
+```
+
+
+Deploy AWS lab using terraform
+```bash
+terraform init ansible-aws-lab
+terraform plan ansible-aws-lab
+terraform apply ansible-aws-lab  -auto-approve
+```
+
 
 
 
