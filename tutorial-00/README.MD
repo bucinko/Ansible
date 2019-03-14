@@ -44,7 +44,7 @@ ansible-aws-lab/var.tf
 ```
 
 
-Deploy AWS lab using terraform
+# Deploy AWS lab using terraform
 ```bash
 terraform init ansible-aws-lab
 terraform plan ansible-aws-lab
@@ -60,11 +60,17 @@ public_dns = [
 ]
 ```
 
-now we can connect to out managment vm:
+# Connect to managment vm
 
 ```bash
  ssh   -i yourPubKeyFile  ubuntu@ec2-52-19-161-219.eu-west-1.compute.amazonaws.com
 ```
 
+install ansible
+
+```bash
+ sudo apt update -y
+ sudo apt install ansible -y
+```
 
 
