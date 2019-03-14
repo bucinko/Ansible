@@ -1,6 +1,6 @@
 
 
-# Prepare Lab environment on AWS
+# Prepare Lab environment on AWS using terraform
 
 ### Installing prerequisities 
 ```bash
@@ -30,7 +30,7 @@ sudo mv terraform /usr/local/bin/
 
 ### Authentication
 
-Authentication with the AWS-related modules is handled by either specifying your access and secret key as ENV variables or module arguments.
+Authentication with the AWS-related modules is handled by either specifying your access and secret key as ENV vars,
 with environment variables:
 ```bash
 export AWS_ACCESS_KEY_ID='AABBBSABABAB'
