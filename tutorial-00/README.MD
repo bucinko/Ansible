@@ -38,7 +38,7 @@ export AWS_SECRET_ACCESS_KEY='123123123123123123123'
 export AWS_DEFAULT_REGION="eu-west-1"
 ```
 
-edit ssh public kei in :
+edit ssh public key in terraform variables. We will use it for conection to bastion host :
 ```bash
 ansible-aws-lab/var.tf
 ```
