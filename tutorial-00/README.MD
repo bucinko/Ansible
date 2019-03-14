@@ -60,13 +60,23 @@ public_dns = [
 ]
 ```
 
-# Connect to managment vm
+# Connection to bastion host 
 
+add you ssh private key to ssh agent
 ```bash
- ssh   -i yourPubKeyFile  ubuntu@ec2-52-19-161-219.eu-west-1.compute.amazonaws.com
+  eval `ssh-agent`
+  ssh-add
+  #verify added key
+  ssh-add -l
 ```
 
-install ansible
+After the key is added to your keychain, you can connect to the bastion instance with SSH using the –A option. 
+```bash
+ ssh   -A  ubuntu@ec2-52-19-161-219.eu-west-1.compute.amazonaws.com
+```
+
+
+# Prepare ansible on Bastion host
 
 ```bash
  sudo apt update -y
