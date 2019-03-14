@@ -62,7 +62,7 @@ public_dns = [
 
 # Connection to bastion host 
 
-add you ssh private key to ssh agent
+add you ssh private key to ssh agent on your local linux station. If you are using Putty on Windows. Use forwarding option for private key  on Putty
 ```bash
   eval `ssh-agent`
   ssh-add
