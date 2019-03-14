@@ -51,7 +51,20 @@ terraform plan ansible-aws-lab
 terraform apply -auto-approve ansible-aws-lab  
 ```
 
+we will get output similar to this:
 
+Outputs:
+```bash
+public_dns = [
+    ec2-52-19-161-219.eu-west-1.compute.amazonaws.com
+]
+```
+
+now we can connect to out managment vm:
+
+```bash
+ ssh   -i yourPubKeyFile  ubuntu@ec2-52-19-161-219.eu-west-1.compute.amazonaws.com
+```
 
 
 
