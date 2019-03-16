@@ -1,3 +1,4 @@
+
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_group}"
   location = "${var.location}"
@@ -15,14 +16,14 @@ resource "azurerm_virtual_network" "vnet" {
 
 resource "azurerm_subnet" "subnet_pub" {
   name                 = "private_subnet"
-  virtual_network_name = "${var.vnet_name}"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   address_prefix       = "10.0.100.0/24"
   }
 
 resource "azurerm_subnet" "subnet_priv" {
   name                 = "private_subnet"
-  virtual_network_name = "${var.vnet_name}"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   address_prefix       = "10.0.1.0/24"
 }
@@ -54,7 +55,7 @@ resource "azurerm_subnet" "subnet_priv" {
     source              = "./module/vm"
     resource_group_name = "${azurerm_resource_group.rg.name}"
     location            = "${var.location}"
-    vm_hostname         = "vm"
+    vm_hostname         = "bastion"
     nb_public_ip        = "1"
     remote_port         = "22"
     nb_instances        = "1"
@@ -62,12 +63,17 @@ resource "azurerm_subnet" "subnet_priv" {
     vm_os_offer         = "UbuntuServer"
     vm_os_sku           = "18.04-LTS"
     ssh_key             = "${var.ssh_key}"
-    vnet_subnet_id      = "${ azurerm_subnet.subnet_pub.id}"
+    vnet_subnet_id      = "${azurerm_subnet.subnet_pub.id}"
     boot_diagnostics    = "false"
     delete_os_disk_on_termination = "true"
-
+    public_ip_dns       = ["ansiblevmlabs"] 
     tags                = {
                             environment = "dev"
                             costcenter  = "it"
                           }
+  }
+
+
+   output "linux_vm_public_ip"{
+    value = "${module.bastion.public_ip_address}"
   }
