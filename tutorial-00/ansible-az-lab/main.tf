@@ -9,49 +9,28 @@ resource "azurerm_virtual_network" "vnet" {
   name                = "${var.vnet_name}"
   location            = "${var.location}"
   address_space       = ["${var.address_space}"]
-  resource_group_name = "${var.resource_group}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
 }
 
 resource "azurerm_subnet" "subnet_pub" {
   name                 = "private_subnet"
   virtual_network_name = "${var.vnet_name}"
-  resource_group_name  = "${var.resource_group}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
   address_prefix       = "10.0.100.0/24"
   }
 
 resource "azurerm_subnet" "subnet_priv" {
   name                 = "private_subnet"
   virtual_network_name = "${var.vnet_name}"
-  resource_group_name  = "${var.resource_group}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
   address_prefix       = "10.0.1.0/24"
 }
 
 
-resource "azurerm_network_security_group" "sg" {
-  name                = "ansible-az-sg"
-  location            = "${var.location}"
-  resource_group_name = "${var.resource_group}"
-}
-
-
-resource "azurerm_network_security_rule" "test" {
-  name                        = "SSH inbound"
-  priority                    = 100
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  source_port_range           = "*"
-  destination_port_range      = "22"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = "${var.resource_group}"
-  network_security_group_name = "${azurerm_network_security_group.sg.name}"
-}
-
  module "linuxservers" {
     source              = "./module/vm"
-    resource_group_name = "${var.resource_group}"
+    resource_group_name = "${azurerm_resource_group.rg.name}"
     location            = "${var.location}"
     vm_hostname         = "vm"
     nb_public_ip        = "0"
@@ -73,7 +52,7 @@ resource "azurerm_network_security_rule" "test" {
 
  module "bastion" {
     source              = "./module/vm"
-    resource_group_name = "${var.resource_group}"
+    resource_group_name = "${azurerm_resource_group.rg.name}"
     location            = "${var.location}"
     vm_hostname         = "vm"
     nb_public_ip        = "1"
