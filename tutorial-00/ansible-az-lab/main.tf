@@ -62,7 +62,29 @@ resource "azurerm_network_security_rule" "test" {
     vm_os_sku           = "18.04-LTS"
     ssh_key             = "${var.ssh_key}"
     vnet_subnet_id      = "${ azurerm_subnet.subnet_priv.id}"
-    boot_diagnostics    = "true"
+    boot_diagnostics    = "false"
+    delete_os_disk_on_termination = "true"
+
+    tags                = {
+                            environment = "dev"
+                            costcenter  = "it"
+                          }
+  }
+
+ module "bastion" {
+    source              = "./module/vm"
+    resource_group_name = "${var.resource_group}"
+    location            = "${var.location}"
+    vm_hostname         = "vm"
+    nb_public_ip        = "1"
+    remote_port         = "22"
+    nb_instances        = "1"
+    vm_os_publisher     = "Canonical"
+    vm_os_offer         = "UbuntuServer"
+    vm_os_sku           = "18.04-LTS"
+    ssh_key             = "${var.ssh_key}"
+    vnet_subnet_id      = "${ azurerm_subnet.subnet_pub.id}"
+    boot_diagnostics    = "false"
     delete_os_disk_on_termination = "true"
 
     tags                = {
