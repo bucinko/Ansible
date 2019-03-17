@@ -4,21 +4,6 @@ resource "azurerm_resource_group" "rg" {
 
 }
 
-module "network" {
-    source              = "./module/vnet"
-    resource_group_name = "ansible-az-lab"
-    location            = "westeurope"
-    address_space       = "10.0.0.0/16"
-    subnet_prefixes     = ["10.0.1.0/24", "10.0.100.0/24"]
-    subnet_names        = ["private_subnet", "public_subnet"]
-
-    tags                = {
-                            environment = "ansible-az-lab"
-                          }
-}
-
-#Azure Generic vNet Module
-
 
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.vnet_name}"
