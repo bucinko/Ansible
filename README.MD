@@ -1,16 +1,13 @@
 
 #Ansible tutorial
 
-- 00 Setup AWS environment
+- 00 Setup Cloud environment Azure/AWS
 - 01 Inventory 
-- 02 Ansible format
-- 03 Variables
-- 04 Loops
+- 02 Ansible tasks
+- 03 Ansible playbooks
+- 04 Ansible roles
 - 05 Modules
-- 06 Playbooks, AD hoc
-- 07 Jinja templates
-- 08 Ansible roles
-- 09 Ansible Vault
-- 10 Ansible galaxy
+- 06 Ansible Vault
+- 07 Ansible galaxy
 
 Hands On  Lab
