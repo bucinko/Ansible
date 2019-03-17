@@ -38,8 +38,21 @@ resource "aws_key_pair" "deployer" {
 
 
 
-module "ec2_vm1" {
+module "ec2_vm0" {
   private_ip = "10.0.1.100"
+  source =  "terraform-aws-modules/ec2-instance/aws"
+  instance_type = "${var.instance_type}"
+  name = "vm0"
+  key_name               =   "${aws_key_pair.deployer.key_name}"
+  ami = "${var.ami_id}"
+  associate_public_ip_address = false
+  subnet_id = "${element(module.vpc.private_subnets, 0)}"
+  instance_count         = 1
+  vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]
+}
+
+module "ec2_vm1" {
+  private_ip = "10.0.1.110"
   source =  "terraform-aws-modules/ec2-instance/aws"
   instance_type = "${var.instance_type}"
   name = "vm1"
@@ -51,27 +64,14 @@ module "ec2_vm1" {
   vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]
 }
 
+
+
+
 module "ec2_vm2" {
-  private_ip = "10.0.1.110"
-  source =  "terraform-aws-modules/ec2-instance/aws"
-  instance_type = "${var.instance_type}"
-  name = "vm2"
-  key_name               =   "${aws_key_pair.deployer.key_name}"
-  ami = "${var.ami_id}"
-  associate_public_ip_address = false
-  subnet_id = "${element(module.vpc.private_subnets, 0)}"
-  instance_count         = 1
-  vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]
-}
-
-
-
-
-module "ec2_vm3" {
   private_ip = "10.0.1.120"
   source =  "terraform-aws-modules/ec2-instance/aws"
   instance_type = "${var.instance_type}"
-  name = "vm3"
+  name = "vm2"
   key_name               =   "${aws_key_pair.deployer.key_name}"
   ami = "${var.ami_id}"
   associate_public_ip_address = false
