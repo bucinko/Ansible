@@ -72,6 +72,7 @@ resource "azurerm_virtual_machine" "vm-linux" {
     disable_password_authentication = true
 
     ssh_keys {
+       path     = "/home/${var.admin_username}/.ssh/authorized_keys"
        key_data = "${var.ssh_key}"
     }
   }
