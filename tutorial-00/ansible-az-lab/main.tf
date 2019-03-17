@@ -50,7 +50,7 @@ resource "azurerm_network_security_rule" "test" {
 }
 
  module "linuxservers" {
-    source              = "github.com/Azure/terraform-azurerm-compute"
+    source              = "./module/vm"
     resource_group_name = "${var.resource_group}"
     location            = "${var.location}"
     vm_hostname         = "vm"
@@ -60,6 +60,7 @@ resource "azurerm_network_security_rule" "test" {
     vm_os_publisher     = "Canonical"
     vm_os_offer         = "UbuntuServer"
     vm_os_sku           = "18.04-LTS"
+    ssh_key             = "${var.ssh_key}"
     vnet_subnet_id      = "${ azurerm_subnet.subnet_priv.id}"
     boot_diagnostics    = "true"
     delete_os_disk_on_termination = "true"
