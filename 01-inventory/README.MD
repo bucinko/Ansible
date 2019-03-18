@@ -35,11 +35,35 @@ web
 database
 ```
 
-### Host selection
+we can disable host key checking by adding file vi ~/.ansible.cfg
+
+```bash
+[defaults]
+host_key_checking = False
+```
 
 
-TODO
+### Talking to nodes
 
-### Setting variables
+What ansible will try to do here is just executing the ping module (more on modules later) on each host.
+The output should look like this:
 
-TODO
+```bash
+ansible -m ping -i 01-inventory/hosts  all
+```
+
+```bash
+lb01 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+db01 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+app01 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+```
