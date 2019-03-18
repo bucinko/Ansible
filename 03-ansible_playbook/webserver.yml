@@ -1,0 +1,10 @@
+
+- hosts: webserver
+  become: true
+  tasks:
+     - name: install web server
+        apt:
+          name: {{ item }}
+          state: present
+          update_cache: yes
+        with_items:
