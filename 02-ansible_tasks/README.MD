@@ -65,6 +65,36 @@ app01 | SUCCESS => {
 -  Git Module - will allow you to manage git checkouts of repositories to deploy software
 
 
+## Variables
+
+Variables in inventory file
+
+### Host variables
+example we want setup variable ```diskType=SSD``` for web server
+```bash
+[webserver]
+app01   diskType=SSD        ansible_host=vm1        ansible_user=azureuser
+```
+
+### Group variables
+
+we want setup variable for all web servers in our inventory
+```bash
+[webserver]
+app01   diskType=SSD        ansible_host=vm1        ansible_user=azureuser
+[webserver:vars]
+ntp_server=ntp.infra.example.com
+```
+
+
+When using ```ansible``` or ```ansible-playbook``` command, variables can also be set with ```--extra-vars``` (or ```-e```) command line switch as a whitespace-separated list of ```key=val``` pairs
+Ansible will look for additional variables definitions in group and host variable files. These files will be searched in directories group_vars and host_vars, below the directory where the main inventory file is located.
+The files will be searched by name. For instance, using the previously mentioned inventory file, host0 variables will be searched in those files:
+
+- ```group_vars/linux```
+- ```group_vars/ubuntu```
+- ```host_vars/host0```
+
 
 
 
