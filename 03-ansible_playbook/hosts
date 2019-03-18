@@ -7,3 +7,5 @@ app01           ansible_host=vm1        ansible_user=azureuser
 
 [database]
 db01            ansible_host=vm2        ansible_user=azureuser
+
+
