@@ -43,7 +43,7 @@ host_key_checking = False
 ```
 
 
-### Talking to nodes
+### Testing connection
 
 What ansible will try to do here is just executing the ping module (more on modules later) on each host.
 The output should look like this:
@@ -65,5 +65,22 @@ app01 | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
+```
 
+
+### Selecting hosts
+
+we can test all hosts by parameter ```all```
+
+We can also test conection to one node by calling its name e.g ```app01```   
+
+```bash
+ansible -m ping -i 01-inventory/hosts  app01
+```
+
+Test conection to specific group of servers 'webserver'
+
+
+```bash
+ansible -m ping -i 01-inventory/hosts  webserver
 ```
