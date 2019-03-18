@@ -67,8 +67,7 @@ app01 | SUCCESS => {
 
 ## Variables
 
-Variables in inventory file
-
+We ca setup variables for host(host variables) or for group of hosts (group variables). 
 ### Host variables
 example we want setup variable ```diskType=SSD``` for web server
 ```bash
@@ -88,12 +87,12 @@ ntp_server=ntp.infra.example.com
 
 
 When using ```ansible``` or ```ansible-playbook``` command, variables can also be set with ```--extra-vars``` (or ```-e```) command line switch as a whitespace-separated list of ```key=val``` pairs
+
 Ansible will look for additional variables definitions in group and host variable files. These files will be searched in directories group_vars and host_vars, below the directory where the main inventory file is located.
 The files will be searched by name. For instance, using the previously mentioned inventory file, host0 variables will be searched in those files:
 
-- ```group_vars/linux```
-- ```group_vars/ubuntu```
-- ```host_vars/host0```
+- ```group_vars```
+- ```host_vars```
 
 
 
